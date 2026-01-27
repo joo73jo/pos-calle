@@ -1,0 +1,112 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Admin - Productos</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>Crear producto</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+            <ion-item>
+                <ion-label position="stacked">Nombre</ion-label>
+                <ion-input [(ngModel)]="form.nombre"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">Precio venta</ion-label>
+                <ion-input type="number" [(ngModel)]="form.precio_venta"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">Stock inicial</ion-label>
+                <ion-input type="number" [(ngModel)]="form.stock_actual"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Activo</ion-label>
+                <ion-toggle [(ngModel)]="form.activo"></ion-toggle>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">Imagen (opcional)</ion-label>
+                <input type="file" accept="image/*" (change)="onFile($event)" />
+            </ion-item>
+
+            <ion-button expand="block" (click)="create()">Crear</ion-button>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="editing">
+        <ion-card-header>
+            <ion-card-title>Editar producto</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+            <ion-item>
+                <ion-label position="stacked">Nombre</ion-label>
+                <ion-input [(ngModel)]="editForm.nombre"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">Precio venta</ion-label>
+                <ion-input type="number" [(ngModel)]="editForm.precio_venta"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">Stock</ion-label>
+                <ion-input type="number" [(ngModel)]="editForm.stock_actual"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Activo</ion-label>
+                <ion-toggle [(ngModel)]="editForm.activo"></ion-toggle>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">Cambiar imagen (opcional)</ion-label>
+                <input type="file" accept="image/*" (change)="onEditFile($event)" />
+            </ion-item>
+
+            <div style="display:flex; gap:10px; margin-top:12px;">
+                <ion-button expand="block" (click)="saveEdit()">Guardar cambios</ion-button>
+                <ion-button expand="block" color="medium" (click)="cancelEdit()">Cancelar</ion-button>
+            </div>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>Listado</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+            <ion-list>
+                <ion-item *ngFor="let p of products">
+                    <ion-thumbnail slot="start" *ngIf="imgUrl(p.image_path)">
+                        <img [src]="imgUrl(p.image_path)!" />
+                    </ion-thumbnail>
+
+                    <ion-label>
+                        <h2>{{ p.nombre }}</h2>
+                        <p>$ {{ p.precio_venta }} | Stock: {{ p.stock_actual }}</p>
+                        <p>Activo: {{ p.activo }}</p>
+                    </ion-label>
+
+                    <ion-button size="small" (click)="startEdit(p)">Editar</ion-button>
+
+                    <ion-button size="small" (click)="toggleActivo(p)">
+                        {{ p.activo ? 'Desactivar' : 'Activar' }}
+                    </ion-button>
+
+                    <ion-button color="danger" size="small" (click)="remove(p)">Eliminar</ion-button>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>

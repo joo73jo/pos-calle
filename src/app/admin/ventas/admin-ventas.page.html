@@ -1,0 +1,100 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Admin - Ventas & Reportes</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>Filtros</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+
+            <ion-item>
+                <ion-label position="stacked">Desde</ion-label>
+                <ion-input type="date" [(ngModel)]="from"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">Hasta</ion-label>
+                <ion-input type="date" [(ngModel)]="to"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Tipo venta</ion-label>
+                <ion-select [(ngModel)]="tipo_venta">
+                    <ion-select-option value="">Todos</ion-select-option>
+                    <ion-select-option value="local">Local</ion-select-option>
+                    <ion-select-option value="domicilio">Domicilio</ion-select-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Método pago</ion-label>
+                <ion-select [(ngModel)]="metodo_pago_cliente">
+                    <ion-select-option value="">Todos</ion-select-option>
+                    <ion-select-option value="efectivo">Efectivo</ion-select-option>
+                    <ion-select-option value="transferencia">Transferencia</ion-select-option>
+                    <ion-select-option value="tarjeta">Tarjeta</ion-select-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-button expand="block" [disabled]="loading" (click)="buscar()">
+                {{ loading ? 'Buscando...' : 'Buscar' }}
+            </ion-button>
+
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="result">
+        <ion-card-header>
+            <ion-card-title>Resumen</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <p><strong>Total ventas:</strong> $ {{ result.resumen.totalVentas.toFixed(2) }}</p>
+            <p><strong>Número de ventas:</strong> {{ result.resumen.numVentas }}</p>
+            <p><strong>Local:</strong> $ {{ result.resumen.domicilioVsLocal.local.toFixed(2) }}</p>
+            <p><strong>Domicilio:</strong> $ {{ result.resumen.domicilioVsLocal.domicilio.toFixed(2) }}</p>
+
+            <p><strong>Desglose pago:</strong></p>
+            <ul>
+                <li>Efectivo: $ {{ result.resumen.desglosePago.efectivo.toFixed(2) }}</li>
+                <li>Transferencia: $ {{ result.resumen.desglosePago.transferencia.toFixed(2) }}</li>
+                <li>Tarjeta: $ {{ result.resumen.desglosePago.tarjeta.toFixed(2) }}</li>
+            </ul>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="result">
+        <ion-card-header>
+            <ion-card-title>Ventas</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+
+            <ion-list>
+                <ion-item *ngFor="let s of result.sales">
+                    <ion-label>
+                        <h2>
+                            {{ s.created_at | date:'short' }} — $ {{ toMoney(s.total) }}
+                            <span *ngIf="s.estado === 'anulada'"> (ANULADA)</span>
+                        </h2>
+                        <p>Tipo: {{ s.tipo_venta }} | Pago: {{ s.metodo_pago_cliente }}</p>
+                        <p *ngIf="s.deliveries?.length">
+                            Delivery: efectivo={{ s.deliveries[0].estado_efectivo }}
+                            | entrega={{ s.deliveries[0].estado_entrega }}
+                            | cancelado={{ s.deliveries[0].cancelado }}
+                        </p>
+                    </ion-label>
+
+                    <ion-button color="danger" size="small" *ngIf="s.estado === 'registrada'" (click)="anular(s)">
+                        Anular
+                    </ion-button>
+                </ion-item>
+            </ion-list>
+
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>
