@@ -1,13 +1,78 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>pedidos</ion-title>
+    <ion-title>Mis pedidos</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="load()">Actualizar</ion-button>
+      <ion-button color="danger" (click)="logout()">Salir</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">pedidos</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+
+  <ion-item *ngIf="!gpsGranted && gpsError">
+    <ion-label color="warning">{{ gpsError }}</ion-label>
+    <ion-button slot="end" (click)="ensureGpsPermission()">Permitir GPS</ion-button>
+  </ion-item>
+
+  <ion-refresher slot="fixed" (ionRefresh)="load($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card *ngFor="let d of deliveries">
+    <ion-card-header>
+      <ion-card-title>
+        Pedido: {{ d.sales?.sale_id?.slice(0,8) }} - ${{ d.sales?.total }}
+      </ion-card-title>
+      <ion-card-subtitle>
+        Entrega: <b>{{ d.estado_entrega }}</b> | Efectivo: <b>{{ d.estado_efectivo }}</b>
+      </ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div *ngIf="d.sales?.sale_items?.length">
+        <div *ngFor="let it of d.sales.sale_items">
+          • {{ it.products?.nombre }} x {{ it.cantidad }}
+        </div>
+      </div>
+
+      <ion-grid class="ion-margin-top">
+        <ion-row>
+          <ion-col size="4">
+            <ion-button expand="block" (click)="setEntrega(d,'en_camino')">En camino</ion-button>
+          </ion-col>
+          <ion-col size="4">
+            <ion-button expand="block" color="success" (click)="setEntrega(d,'entregado')">Entregado</ion-button>
+          </ion-col>
+          <ion-col size="4">
+            <ion-button expand="block" color="medium" (click)="setEntrega(d,'asignado')">Reset</ion-button>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-margin-top" *ngIf="(d.monto_efectivo_en_manos || 0) > 0">
+          <ion-col size="4">
+            <ion-button expand="block" color="success" (click)="efectivoEntregado(d)">Efectivo OK</ion-button>
+          </ion-col>
+          <ion-col size="4">
+            <ion-button expand="block" color="warning" (click)="efectivoPendiente(d)">Pendiente</ion-button>
+          </ion-col>
+          <ion-col size="4">
+            <ion-button expand="block" color="danger" (click)="efectivoDebe(d)">Debo</ion-button>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="(d.monto_efectivo_en_manos || 0) === 0">
+          <ion-col>
+            <ion-note>Este pedido no maneja efectivo.</ion-note>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <div class="ion-margin-top" *ngIf="d.last_lat && d.last_lng">
+        <small>Última ubicación: {{ d.last_lat }}, {{ d.last_lng }}</small><br />
+        <small>{{ d.last_location_ts | date:'short' }}</small>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

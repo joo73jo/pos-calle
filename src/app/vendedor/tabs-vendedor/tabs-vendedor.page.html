@@ -1,13 +1,30 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>tabs-vendedor</ion-title>
+    <ion-title>Vendedor</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)="logout()">SALIR</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">tabs-vendedor</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="pos" [routerLink]="['/tabs-vendedor/pos']">
+        <ion-label>POS</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="inventario" [routerLink]="['/tabs-vendedor/inventario']">
+        <ion-label>Invent.</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="cierre" [routerLink]="['/tabs-vendedor/cierre-caja']">
+        <ion-label>Cierre</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="seguimiento" [routerLink]="['/tabs-vendedor/seguimiento']">
+        <ion-label>Seguimiento</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-content>

@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Seguimiento</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="load()">Actualizar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card *ngFor="let d of deliveries">
+    <ion-card-header>
+      <ion-card-title>
+        {{ d.sales?.sale_id?.slice(0,8) }} - ${{ d.sales?.total }}
+      </ion-card-title>
+      <ion-card-subtitle>
+        Repartidor: <b>{{ d.profiles?.nombre }}</b><br>
+        Entrega: <b>{{ d.estado_entrega }}</b> | Efectivo: <b>{{ d.estado_efectivo }}</b>
+      </ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div *ngIf="d.last_lat && d.last_lng">
+        <small>GPS: {{ d.last_lat }}, {{ d.last_lng }}</small><br />
+        <small>{{ d.last_location_ts | date:'short' }}</small>
+      </div>
+      <div *ngIf="!d.last_lat || !d.last_lng">
+        <ion-note>Aún sin ubicación.</ion-note>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

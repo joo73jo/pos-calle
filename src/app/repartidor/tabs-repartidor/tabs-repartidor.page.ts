@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { Router } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
+import { RouterModule } from '@angular/router';
+
+import { AuthService } from '../../core/auth/auth.service';
 
 @Component({
-  selector: 'app-tabs-repartidor',
+  standalone: true,
   templateUrl: './tabs-repartidor.page.html',
   styleUrls: ['./tabs-repartidor.page.scss'],
-  standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [CommonModule, IonicModule, RouterModule],
 })
-export class TabsRepartidorPage implements OnInit {
+export class TabsRepartidorPage {
+  constructor(private auth: AuthService, private router: Router) {}
 
-  constructor() { }
-
-  ngOnInit() {
+  async logout() {
+    await this.auth.signOut();
+    this.router.navigateByUrl('/home', { replaceUrl: true });
   }
-
 }
+

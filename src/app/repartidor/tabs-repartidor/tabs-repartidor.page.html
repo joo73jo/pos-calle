@@ -1,13 +1,13 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>tabs-repartidor</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="pedidos" [routerLink]="['/tabs-repartidor/pedidos']">
+      <ion-icon name="bicycle-outline"></ion-icon>
+      <ion-label>Pedidos</ion-label>
+    </ion-tab-button>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">tabs-repartidor</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+    <ion-tab-button (click)="logout()">
+      <ion-icon name="log-out-outline"></ion-icon>
+      <ion-label>Salir</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

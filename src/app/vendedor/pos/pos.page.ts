@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule, ToastController, AlertController } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
+
 import { SalesService, CartItem, TipoVenta, MetodoPago } from '../../core/services/sales.service';
 import { AdminProductsService } from '../../core/services/admin-products.service';
 
@@ -15,7 +16,6 @@ export class PosPage implements OnInit {
 
   products: any[] = [];
   repartidores: any[] = [];
-
   cart: CartItem[] = [];
 
   tipo_venta: TipoVenta = 'local';
@@ -30,7 +30,7 @@ export class PosPage implements OnInit {
     private adminProducts: AdminProductsService,
     private toastCtrl: ToastController,
     private alertCtrl: AlertController
-  ) { }
+  ) {}
 
   async ngOnInit() {
     await this.load();
@@ -47,9 +47,8 @@ export class PosPage implements OnInit {
 
   addToCart(p: any) {
     const found = this.cart.find(i => i.product_id === p.product_id);
-    if (found) {
-      found.cantidad += 1;
-    } else {
+    if (found) found.cantidad += 1;
+    else {
       this.cart.push({
         product_id: p.product_id,
         nombre: p.nombre,
@@ -71,9 +70,8 @@ export class PosPage implements OnInit {
   }
 
   async createSale() {
-    if (this.cart.length === 0) {
-      return this.showToast('Carrito vacío');
-    }
+    if (this.cart.length === 0) return this.showToast('Carrito vacío');
+
     if (this.tipo_venta === 'domicilio' && !this.repartidor_id) {
       return this.showToast('Para domicilio debes asignar repartidor');
     }
@@ -86,12 +84,14 @@ export class PosPage implements OnInit {
         { text: 'Sí, registrar', role: 'confirm' }
       ]
     });
+
     await confirm.present();
     const { role } = await confirm.onDidDismiss();
     if (role !== 'confirm') return;
 
     try {
       this.loading = true;
+
       const saleId = await this.sales.createSalePOS({
         tipo_venta: this.tipo_venta,
         metodo_pago_cliente: this.metodo_pago_cliente,

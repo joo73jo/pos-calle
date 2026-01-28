@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Cierre de caja</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Fecha</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="stacked">Día</ion-label>
+        <ion-input type="date" [(ngModel)]="dateISO"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Efectivo contado en caja</ion-label>
+        <ion-input type="number" [(ngModel)]="efectivo_contado_en_caja"></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" (click)="calcular()">CALCULAR</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="resumen">
+    <ion-card-header>
+      <ion-card-title>Resumen</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Total local: <b>${{resumen.total_local}}</b></p>
+      <p>Total domicilio: <b>${{resumen.total_domicilio}}</b></p>
+
+      <p>Efectivo cliente (total del día): <b>${{resumen.total_efectivo_cliente}}</b></p>
+      <p>Transferencia: <b>${{resumen.total_transferencia}}</b></p>
+      <p>Tarjeta: <b>${{resumen.total_tarjeta}}</b></p>
+
+      <p>Efectivo entregado por repartidores: <b>${{resumen.total_efectivo_entregado_por_repartidores}}</b></p>
+      <p>Efectivo pendiente repartidores: <b>${{resumen.total_efectivo_pendiente_repartidores}}</b></p>
+
+      <hr>
+      <p>Efectivo teórico en caja: <b>${{resumen.efectivo_teorico}}</b></p>
+      <p>Diferencia: <b>${{diferencia}}</b></p>
+
+      <ion-button expand="block" color="success" (click)="guardar()">GUARDAR CIERRE</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

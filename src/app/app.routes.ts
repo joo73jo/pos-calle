@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { roleGuard } from './core/guards/role.guard';
 
 export const routes: Routes = [
   {
@@ -12,6 +13,8 @@ export const routes: Routes = [
     path: 'tabs-admin',
     loadComponent: () =>
       import('./admin/tabs-admin/tabs-admin.page').then((m) => m.TabsAdminPage),
+    canActivate: [roleGuard],
+    data: { roles: ['admin'] },
     children: [
       {
         path: 'productos',
@@ -32,6 +35,8 @@ export const routes: Routes = [
     path: 'tabs-vendedor',
     loadComponent: () =>
       import('./vendedor/tabs-vendedor/tabs-vendedor.page').then((m) => m.TabsVendedorPage),
+    canActivate: [roleGuard],
+    data: { roles: ['vendedor', 'admin'] },
     children: [
       {
         path: 'pos',
@@ -42,6 +47,14 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./vendedor/inventario/inventario.page').then((m) => m.InventarioPage),
       },
+      {
+        path: 'cierre-caja',
+        loadComponent: () =>
+          import('./vendedor/cierre-caja/cierre-caja.page')
+.then((m) => m.CierreCajaPage),
+      },
+       { path: 'seguimiento', loadComponent: () => import('./vendedor/seguimiento/seguimiento.page').then(m => m.SeguimientoPage) },
+
       { path: '', redirectTo: 'pos', pathMatch: 'full' },
     ],
   },
@@ -51,6 +64,8 @@ export const routes: Routes = [
     path: 'tabs-repartidor',
     loadComponent: () =>
       import('./repartidor/tabs-repartidor/tabs-repartidor.page').then((m) => m.TabsRepartidorPage),
+    canActivate: [roleGuard],
+    data: { roles: ['repartidor', 'admin'] },
     children: [
       {
         path: 'pedidos',
