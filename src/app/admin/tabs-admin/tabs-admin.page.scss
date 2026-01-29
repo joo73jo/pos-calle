@@ -1,0 +1,125 @@
+/* ===============================
+   PALETA CALCUBIT
+================================ */
+$green-main: #4caf50;
+$green-soft: #6bcf8e;
+$black-main: #0f0f0f;
+$black-elevated: #1a1a1a;
+$text-muted: #9e9e9e;
+$white: #ffffff;
+
+/* ===============================
+   HEADER
+================================ */
+ion-header {
+  ion-toolbar {
+    --background: #0f0f0f;
+    --color: #ffffff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  ion-title {
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    font-size: 18px;
+  }
+
+  ion-buttons ion-button {
+    --background: transparent;
+    --color: #6bcf8e;
+    --border-radius: 20px;
+    font-weight: 500;
+    font-size: 13px;
+    padding-inline: 10px;
+
+    ion-icon {
+      font-size: 18px;
+      margin-right: 4px;
+    }
+  }
+}
+
+/* ===============================
+   TABS CONTAINER
+================================ */
+ion-tabs {
+  background: $black-main;
+}
+
+/* ===============================
+   TAB BAR (INFERIOR)
+================================ */
+ion-tab-bar {
+  --background: rgba(15, 15, 15, 0.95);
+  --border: none;
+  height: 70px;
+  padding-bottom: env(safe-area-inset-bottom);
+  box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.6);
+
+  /* glass sutil */
+  backdrop-filter: blur(10px);
+}
+
+/* ===============================
+   TAB BUTTON
+================================ */
+ion-tab-button {
+  --color: $text-muted;
+  --color-selected: $green-main;
+  background: transparent;
+  position: relative;
+  font-size: 11px;
+  letter-spacing: 0.4px;
+
+  ion-icon {
+    font-size: 22px;
+    margin-bottom: 3px;
+    transition: transform 0.25s ease, color 0.25s ease;
+  }
+
+  ion-label {
+    font-weight: 500;
+    transition: opacity 0.25s ease;
+  }
+}
+
+/* ===============================
+   TAB ACTIVO
+================================ */
+ion-tab-button.tab-selected {
+  --color: $green-main;
+}
+
+ion-tab-button.tab-selected ion-icon {
+  transform: scale(1.15);
+  color: $green-soft;
+}
+
+ion-tab-button.tab-selected ion-label {
+  opacity: 1;
+}
+
+/* Indicador superior tipo app premium */
+ion-tab-button.tab-selected::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 28px;
+  height: 3px;
+  border-radius: 0 0 6px 6px;
+  background: linear-gradient(90deg, $green-main, $green-soft);
+}
+
+/* ===============================
+   RIPPLE ANDROID SUAVE
+================================ */
+ion-tab-button::part(native) {
+  --ripple-color: rgba(76, 175, 80, 0.18);
+}
+
+/* ===============================
+   ROUTER OUTLET
+================================ */
+ion-router-outlet {
+  background: $black-main;
+}

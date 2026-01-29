@@ -1,0 +1,126 @@
+:host {
+  display: block;
+}
+
+/* fondo general */
+ion-content {
+  --background: linear-gradient(
+    180deg,
+    #0f0f0f 0%,
+    #121212 55%,
+    #0f0f0f 100%
+  );
+}
+
+/* header */
+ion-toolbar {
+  --background: #0f0f0f;
+  --color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+ion-title {
+  font-weight: 600;
+  letter-spacing: 0.4px;
+}
+
+/* botones del header */
+ion-toolbar ion-button {
+  --color: #6bcf8e;
+}
+
+ion-toolbar ion-button[color="danger"] {
+  --color: #ff6b6b;
+}
+
+/* banner gps */
+.gps-banner {
+  margin: 12px;
+  border-radius: 12px;
+  --background: rgba(255, 193, 7, 0.12);
+  --color: #f5c842;
+}
+
+.gps-banner ion-button {
+  --background: #4caf50;
+  --color: #0f0f0f;
+  --border-radius: 10px;
+  font-weight: 600;
+}
+
+/* wrapper central */
+.center-wrapper {
+  height: calc(100vh - 140px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+/* tarjeta central */
+.center-card {
+  width: 100%;
+  max-width: 380px;
+  background: rgba(23, 23, 23, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+  text-align: center;
+}
+
+/* contenido */
+.center-card ion-card-content {
+  padding: 28px 22px;
+}
+
+/* icono */
+.center-card ion-icon {
+  font-size: 64px;
+  color: #6bcf8e;
+  margin-bottom: 16px;
+}
+
+/* título */
+.center-card h2 {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+/* texto */
+.center-card p {
+  color: #9e9e9e;
+  font-size: 14px;
+  margin-bottom: 22px;
+}
+
+/* botón principal – mata el azul definitivamente */
+.center-card ion-button,
+.center-card ion-button.primary,
+.center-card ion-button[color="primary"] {
+  --background: linear-gradient(135deg, #4caf50, #6bcf8e);
+  --color: #0f0f0f;
+  --border-radius: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 10px 24px rgba(76, 175, 80, 0.35);
+}
+
+/* ripple */
+.center-card ion-button::part(native) {
+  --ripple-color: rgba(76, 175, 80, 0.25);
+}
+
+/* tabs */
+ion-tab-bar {
+  --background: #0f0f0f;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+ion-tab-button {
+  --color: #8a8a8a;
+}
+
+ion-tab-button.tab-selected {
+  --color: #6bcf8e;
+}

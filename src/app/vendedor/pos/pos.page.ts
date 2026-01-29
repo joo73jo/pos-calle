@@ -11,6 +11,7 @@ import { AdminProductsService } from '../../core/services/admin-products.service
   selector: 'app-pos',
   imports: [CommonModule, IonicModule, FormsModule],
   templateUrl: './pos.page.html',
+  styleUrls: ['./pos.page.scss'],
 })
 export class PosPage implements OnInit {
 
