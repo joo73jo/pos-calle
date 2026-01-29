@@ -7,6 +7,7 @@ import { DeliveriesService } from '../../core/services/deliveries.service';
   standalone: true,
   imports: [CommonModule, IonicModule],
   templateUrl: './seguimiento.page.html',
+  styleUrls: ['./seguimiento.page.scss'],
 })
 export class SeguimientoPage implements OnInit, OnDestroy {
 

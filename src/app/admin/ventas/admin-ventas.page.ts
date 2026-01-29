@@ -10,6 +10,7 @@ import { SalesService } from '../../core/services/sales.service';
     selector: 'app-admin-ventas',
     imports: [CommonModule, IonicModule, FormsModule],
     templateUrl: './admin-ventas.page.html',
+    styleUrls: ['./admin-ventas.page.scss'],
 })
 export class AdminVentasPage {
 

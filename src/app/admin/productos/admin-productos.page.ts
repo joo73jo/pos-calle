@@ -9,6 +9,7 @@ import { AdminProductsService } from '../../core/services/admin-products.service
     selector: 'app-admin-productos',
     imports: [CommonModule, IonicModule, FormsModule],
     templateUrl: './admin-productos.page.html',
+    styleUrls: ['./admin-productos.page.scss'],
 })
 export class AdminProductosPage implements OnInit {
 

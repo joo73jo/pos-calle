@@ -9,8 +9,10 @@ import { Geolocation } from '@capacitor/geolocation';
 @Component({
   standalone: true,
   imports: [CommonModule, IonicModule],
-  templateUrl: './pedidos.page.html'
+  templateUrl: './pedidos.page.html',
+  styleUrls: ['./pedidos.page.scss'],
 })
+
 export class PedidosPage implements OnInit, OnDestroy {
 
   me: any = null;

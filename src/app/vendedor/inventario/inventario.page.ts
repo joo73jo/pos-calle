@@ -12,6 +12,7 @@ type MovementTipo = 'produccion' | 'merma' | 'ajuste';
   selector: 'app-inventario',
   imports: [CommonModule, IonicModule, FormsModule],
   templateUrl: './inventario.page.html',
+  styleUrls: ['./inventario.page.scss'],
 })
 export class InventarioPage implements OnInit {
   me: any = null;
