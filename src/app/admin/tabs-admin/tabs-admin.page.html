@@ -1,17 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Admin</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)="logout()">
+        <ion-icon slot="start" name="log-out-outline"></ion-icon>
+        Salir
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-tabs>
+  <ion-router-outlet></ion-router-outlet>
+
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="productos" routerLink="/admin-productos">
+    <ion-tab-button tab="productos" [routerLink]="['/tabs-admin/productos']">
       <ion-icon name="cube-outline"></ion-icon>
       <ion-label>Productos</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="ventas" routerLink="/admin-ventas">
-      <ion-icon name="stats-chart-outline"></ion-icon>
+    <ion-tab-button tab="ventas" [routerLink]="['/tabs-admin/ventas']">
+      <ion-icon name="receipt-outline"></ion-icon>
       <ion-label>Ventas</ion-label>
     </ion-tab-button>
-    <ion-buttons slot="end">
-  <ion-button color="danger" (click)="logout()">SALIR</ion-button>
-</ion-buttons>
-
   </ion-tab-bar>
 </ion-tabs>

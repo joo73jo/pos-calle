@@ -7,6 +7,11 @@ export const routes: Routes = [
     loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
+  {
+    path: 'register',
+    loadComponent: () => import('./core/auth/register/register.page').then(m => m.RegisterPage)
+  },
+
 
   // ✅ ADMIN
   {
@@ -27,6 +32,7 @@ export const routes: Routes = [
           import('./admin/ventas/admin-ventas.page').then((m) => m.AdminVentasPage),
       },
       { path: '', redirectTo: 'productos', pathMatch: 'full' },
+
     ],
   },
 
@@ -51,9 +57,9 @@ export const routes: Routes = [
         path: 'cierre-caja',
         loadComponent: () =>
           import('./vendedor/cierre-caja/cierre-caja.page')
-.then((m) => m.CierreCajaPage),
+            .then((m) => m.CierreCajaPage),
       },
-       { path: 'seguimiento', loadComponent: () => import('./vendedor/seguimiento/seguimiento.page').then(m => m.SeguimientoPage) },
+      { path: 'seguimiento', loadComponent: () => import('./vendedor/seguimiento/seguimiento.page').then(m => m.SeguimientoPage) },
 
       { path: '', redirectTo: 'pos', pathMatch: 'full' },
     ],

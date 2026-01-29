@@ -6,7 +6,7 @@ import {
   IonItem, IonLabel, IonInput, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardContent,
   IonText, IonSpinner
 } from '@ionic/angular/standalone';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../core/auth/auth.service';
 
 @Component({
@@ -19,7 +19,7 @@ import { AuthService } from '../core/auth/auth.service';
     IonHeader, IonToolbar, IonTitle, IonContent,
     IonItem, IonLabel, IonInput, IonButton,
     IonCard, IonCardHeader, IonCardTitle, IonCardContent,
-    IonText, IonSpinner
+    IonText, IonSpinner, RouterLink
   ],
 })
 export class HomePage {
@@ -49,7 +49,6 @@ export class HomePage {
         return;
       }
 
-      // ✅ Normaliza rol (por si viene con espacios o mayúsculas)
       const rol = (profile.rol ?? '').trim().toLowerCase();
 
       if (rol === 'admin') {

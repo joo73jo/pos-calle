@@ -1,0 +1,55 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Registrarse</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>Crear cuenta</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+            <ion-item>
+                <ion-label position="stacked">Nombre</ion-label>
+                <ion-input [(ngModel)]="nombre"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">Correo</ion-label>
+                <ion-input [(ngModel)]="email" type="email"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">Contraseña</ion-label>
+                <ion-input [(ngModel)]="password" type="password"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">Rol</ion-label>
+                <ion-select [(ngModel)]="rol">
+                    <ion-select-option value="vendedor">Vendedor</ion-select-option>
+                    <ion-select-option value="repartidor">Repartidor</ion-select-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-text color="success" *ngIf="okMsg">
+                <p style="margin-top:10px;">{{ okMsg }}</p>
+            </ion-text>
+
+            <ion-text color="danger" *ngIf="errorMsg">
+                <p style="margin-top:10px;">{{ errorMsg }}</p>
+            </ion-text>
+
+            <ion-button expand="block" (click)="register()" [disabled]="loading">
+                <ion-spinner *ngIf="loading" style="margin-right:8px;"></ion-spinner>
+                {{ loading ? 'Creando...' : 'Registrarme' }}
+            </ion-button>
+
+            <ion-button expand="block" fill="clear" routerLink="/home">
+                Volver al login
+            </ion-button>
+        </ion-card-content>
+    </ion-card>
+</ion-content>
