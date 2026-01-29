@@ -49,6 +49,7 @@ export class RegisterPage {
                 email: this.email.trim(),
                 password: this.password.trim(),
                 options: {
+                    emailRedirectTo: 'poscalle://auth-callback',
                     data: {
                         nombre: this.nombre.trim(),
                         rol: this.rol
